@@ -1,0 +1,24 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [(opened)]="opened" mode="side" >
+    <h1 class="text-center">NOTIFICATIONS</h1>
+    <div class="notif" *ngFor="let data of finalarray; let i = index;">
+      <div class="card" *ngIf="valid[i]">
+        <div class="card-body" >
+       
+          <h1 >{{data.user}}</h1>
+          <span class="material-icons close" (click)="delete(i)">
+            highlight_off
+            </span>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+ 
+    <!-- <button (click)="opened=opened">ToggleOpened</button>
+    <button (click)="sidenav.open()">Open</button>
+    <button (click)="sidenav.close()">Close</button>
+    <button (click)="sidenav.toggle()">Toggle</button> -->
+    <router-outlet  ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container> 

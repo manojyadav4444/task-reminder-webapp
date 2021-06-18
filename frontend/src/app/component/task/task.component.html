@@ -1,0 +1,93 @@
+<br>
+<br>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+           <div class="heading">
+            <h1 class="text-center">TASK SCHEDULER</h1>
+            <button class="btn btn-primary" (click)="logout()">Logout</button>
+            <span  *ngIf="l==0" class="material-icons notif" (click)="alarm()" > alarm </span>
+            <span *ngIf="l!=0" class="material-icons notif" (click)="alarm()" matBadge="{{l}}" matBadgeColor="warn"> alarm </span>
+           </div>
+         <br>
+         <div class="row">
+             <div class="container">
+                <form  [formGroup]="myForm">
+                  <div class="col-md-3" [ngClass]="{'has-error': ((myForm.get('taskname').touched ||myForm.get('taskname').dirty) && myForm.get('taskname').errors)}">
+                     <input type="task" class="form-control" id="task" formControlName="taskname" placeholder="Enter Task..."  >
+                     <span class="help-block" *ngIf="((myForm.get('taskname').touched || myForm.get('taskname').dirty) &&  myForm.get('taskname').errors)">
+                     <span *ngIf="myForm.get('taskname').errors.required">       
+                     Full Name is required
+                   </span></span>
+                  </div>
+                  <div class="col-md-3" [ngClass]="{'has-error': ((myForm.get('date').touched ||myForm.get('date').dirty) && myForm.get('date').errors)}">
+                     <input type="date"  class="form-control" id="date" formControlName="date" value="{{ se | date:'yyyy-MM-dd' }}" placeholder="Enter Date..."   >
+                     <span class="textred"  *ngIf="date_not_allowed">       
+                      Date should be greater than current date.
+                      </span>
+                     <span class="help-block" *ngIf="((myForm.get('date').touched || myForm.get('date').dirty) &&  myForm.get('date').errors)">
+                        <span *ngIf="myForm.get('date').errors.required">       
+                           Date is required.
+                      </span>
+                      
+                     </span> 
+                  </div>
+                  <div class="col-md-3" [ngClass]="{'has-error': ((myForm.get('time').touched ||myForm.get('time').dirty) && myForm.get('time').errors)}">
+                     <input type="time" class="form-control" id="time" formControlName="time" value="{{ se | date:'HH:mm' }}" placeholder="24 hour format..." >
+                     <span class="textred"  *ngIf="time_not_allowed">       
+                      Time should be greater than current time.
+                        </span>
+                     <span class="help-block" *ngIf="((myForm.get('time').touched || myForm.get('time').dirty) &&  myForm.get('time').errors)">
+                        <span *ngIf="myForm.get('time').errors.required">       
+                        Time is required
+                      </span></span>
+                  </div>
+                  <div class="col-md-2" *ngIf="!edit1">
+                     <button class="btn btn-primary" (click)="addtask()" [disabled]="!myForm.valid">Add</button>
+                  </div>
+                  <div class="col-md-2"*ngIf="edit1">
+                     <button class="btn btn-primary" (click)="final_edit()" [disabled]="!myForm.valid">Edit</button>
+                  </div>
+                </form>
+             </div>
+             <br>
+         <div class="row" >
+            <div class="col-md-12">
+               <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Task Name</th>
+                      <th>Date Time</th> 
+                      <th>Status</th>
+                      <th>Mark As Done</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        <tr *ngFor="let data of total_task ;let i=index">
+                           <td *ngIf="!data.status">{{data.title}}</td>
+                           <td *ngIf="!data.status">{{data.dt|date:'short'}}</td>
+                           <td *ngIf="!data.status" class="textred">Pending</td>
+                           <td *ngIf="!data.status"> <span class="material-icons textred" *ngIf="!data.status" (click)="markasdone(i)" > check_circle </span></td>        
+                           <td *ngIf="!data.status"><span class="material-icons" (click)="edit(i)">edit </span><span class="material-icons delete" (click)="delete(i)"> delete</span></td>    
+                         </tr>
+                         <tr *ngFor="let data of total_task ;let i=index">
+                           <td *ngIf="data.status">{{data.title}}</td>
+                           <td *ngIf="data.status">{{data.dt|date:'short'}}</td>
+                           <td *ngIf="data.status" class="textgreen">Completed</td>
+                           <td *ngIf="data.status"><span class="material-icons textgreen" *ngIf="data.status"  (click)="markasdone(i)" > check_circle </span></td>
+                           <td *ngIf="data.status"><span class="material-icons" (click)="edit(i)">edit </span><span class="material-icons delete" (click)="delete(i)"> delete</span></td>    
+                         </tr>
+                     
+                  </tbody>
+                </table>
+            </div>
+         </div>
+        </div>
+      </div>
+      
+</div>
+
+ 
+  

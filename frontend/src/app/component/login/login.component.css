@@ -1,0 +1,11 @@
+.card {
+    box-shadow: 7px 6px 12px 4px #a79c9c;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .card-body {
+    padding: 0.6em;
+  }
+  .error{
+    color: red;
+  }

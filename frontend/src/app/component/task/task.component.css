@@ -1,0 +1,30 @@
+.heading{
+  display: flex;
+  justify-content: space-around;
+}
+
+  button:focus {outline:0;}
+button{
+  outline: none;
+}
+.card {
+    box-shadow: 7px 6px 12px 4px #a79c9c;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .card-body {
+    padding: 3em;
+  }
+  tbody tr span{
+    cursor: pointer;
+  }
+  .textred{
+    color: red;
+  }
+  .textgreen{
+    color:green;
+  }
+  .notif{
+    font-size: 40px;
+    cursor: pointer;
+  }
